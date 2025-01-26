@@ -40,6 +40,15 @@ def generate_tts():
 def health_check():
     return jsonify({"status": "ok"}), 200
 
+@app.route("/webhook", methods=["POST"])
+def webhook():
+    try:
+        # Trigger deploy.sh script on push event
+        os.system("bash /path/to/deploy.sh")
+        return jsonify({"status": "Deployment triggered"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
