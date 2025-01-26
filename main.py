@@ -44,7 +44,7 @@ def health_check():
 def webhook():
     try:
         # Trigger deploy.sh script on push event
-        os.system("bash /path/to/deploy.sh")
+        os.system("bash deploy.sh")
         return jsonify({"status": "Deployment triggered"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
